@@ -6,7 +6,7 @@ import Login from "./components/Login/Login.js";
 import Signup from "./components/Signup/Signup.js";
 import Income from "./components/Wallet/Income.js";
 import Outcome from "./components/Wallet/Outcome.js";
-import Wallet from "./components/Wallet/Wallet"
+import Wallet from "./components/Wallet/Wallet.js";
 
 export default function App() {
   const [token, setToken] = useState("");

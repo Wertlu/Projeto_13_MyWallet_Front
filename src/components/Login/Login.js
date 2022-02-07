@@ -1,7 +1,6 @@
 import { React, useState, useContext } from "react";
 import { Container, StyledLink, Button, Input } from "./LoginStyle";
 import { useNavigate } from "react-router-dom";
-
 import UserContext from "../../context/UserContext";
 import Loading from "../../Loading";
 import { login } from "../../services/mywallet";
@@ -19,12 +18,12 @@ export default function Login() {
     const promise = login({ email, password });
 
     promise.then((response) => {
-      setToken(response.data.token);
+      setToken(response.data);
       navigate("/home");
     });
 
     promise.catch(() => {
-      alert("Confira seus dados e tente novamente");
+      alert("Tente de novo");
       setIsLoading(false);
     });
   }

@@ -26,10 +26,9 @@ function deletedHabit(id, auth) {
   return promise;
 }
 
-export {
-  signUp,
-  login,
-  addWithdraw,
-  addDeposit,
-  deletedHabit,
-};
+function getTransaction(token) {
+  const promise = axios.get(`${process.env.REACT_APP_API}/home`, token);
+  return promise;
+}
+
+export { signUp, login, addWithdraw, addDeposit, getTransaction };

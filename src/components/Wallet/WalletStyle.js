@@ -32,6 +32,48 @@ const StyledLink1 = styled(Link)`
   font-weight: bold;
 `;
 
+function Money({ money }) {
+  const { value, description, type, date } = money;
+  return (
+    <Container>
+      <LeftSide>
+        <Date>{date}</Date>
+        <Description>{description}</Description>
+      </LeftSide>
+      <RightSide>
+        <Value type={type}>{value}</Value>
+      </RightSide>
+    </Container>
+  );
+}
+
+const LeftSide = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+const Date = styled.span`
+  font-size: 16px;
+  line-height: 19px;
+  color: #c6c6c6;
+`;
+
+const Description = styled.span`
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+`;
+
+const RightSide = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const Value = styled.span`
+  font-size: 16px;
+  line-height: 19px;
+  color: ${(props) => (props.type === "deposit" ? "green" : "red")};
+`;
+
 const Container = styled.div`
   min-height: 100vh;
   margin-left: 30px;
@@ -90,4 +132,4 @@ const StyledLink2 = styled(Link)`
   font-weight: bold;
 `;
 
-export { Container, Statement, Footer, Icon, StyledLink1, StyledLink2, Header };
+export { Container, Statement, Footer, Icon, StyledLink1, StyledLink2, Header, Money };
