@@ -1,6 +1,6 @@
 import { BiLogOut, BiPlusCircle, BiMinusCircle,  } from "react-icons/bi";
 import { Container, Statement, Footer, Icon, StyledLink1,Total, StyledLink2, Header, Money } from "./WalletStyle";
-import UserContext from "./context/UserContext.js";
+import UserContext from "../../context/UserContext.js";
 import { React, useContext, useState, useEffect, } from "react";
 import { getTransaction } from "../../services/mywallet";
 

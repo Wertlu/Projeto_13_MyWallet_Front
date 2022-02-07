@@ -84,6 +84,26 @@ const Container = styled.div`
   align-items: center;
   gap: 16px;
 `;
+
+const Total = styled.div`
+  width: 80%;
+  position: fixed;
+  bottom: 160px;
+  display: flex;
+  justify-content: space-between;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 20px;
+  .red {
+    color: red;
+  }
+  .green {
+    color: green;
+  }
+`;
+
 const Statement = styled.div`
   width: 326px;
   height: 446px;
@@ -132,4 +152,4 @@ const StyledLink2 = styled(Link)`
   font-weight: bold;
 `;
 
-export { Container, Statement, Footer, Icon, StyledLink1, StyledLink2, Header, Money };
+export { Container, Statement, Footer, Icon, Total, StyledLink1, StyledLink2, Header, Money };

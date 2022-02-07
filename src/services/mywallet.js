@@ -21,11 +21,6 @@ function addDeposit(data, auth) {
   return promise;
 }
 
-function deletedHabit(id, auth) {
-  const promise = axios.delete(`${BASE_URL}/habits/${id}`, auth);
-  return promise;
-}
-
 function getTransaction(token) {
   const promise = axios.get(`${process.env.REACT_APP_API}/home`, token);
   return promise;
