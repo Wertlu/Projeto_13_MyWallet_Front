@@ -1,77 +1,67 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Logo = styled.h1`
-font-family: 'Saira Stencil One', cursive;
-font-style: normal;
-font-weight: normal;
-font-size: 32px;
-line-height: 50px;
-color: #FFFFFF;
-`
-
 const Container = styled.div`
+  min-height: 100vh;
+  margin-left: 30px;
+  margin-right: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 16px;
 `;
 
-const Input = styled.input`
-width: 60px;
-height: 23px;
-left: 40px;
-top: 251px;
-
-font-family: 'Raleway', sans-serif;
-font-style: normal;
-font-weight: normal;
-font-size: 20px;
-line-height: 23px;
-
-color: #000000;
-
-width: 326px;
-height: 58px;
-left: 25px;
-top: 233px;
-
-background: #FFFFFF;
-border-radius: 5px;
-border: none;
+const StyledLink = styled(Link)`
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 18px;
+  color: #ffffff;
+  text-decoration: none;
 `;
 
 const Button = styled.button`
-width: 59px;
-height: 23px;
-left: 158px;
-top: 386px;
-
-font-family: 'Raleway', sans-serif;
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 23px;
-
-color: #FFFFFF;
-
-width: 326px;
-height: 46px;
-left: 23px;
-top: 375px;
-
-background: #A328D6;
-border-radius: 5px;
-border: none;
+  height: 45px;
+  width: 100%;
+  border: none;
+  background: #a328d6;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 21px;
+  line-height: 26px;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  &:disabled {
+    display: flex;
+    justify-content: center;
+    background-color: #c46fe9;
+  }
 `;
 
-const Login = styled.span`
-font-family: 'Raleway', sans-serif;
-font-style: normal;
-font-weight: bold;
-font-size: 15px;
-line-height: 18px;
-color: #FFFFFF;
+const Input = styled.input`
+  height: 45px;
+  width: 100%;
+  border: 1px solid #d5d5d5;
+  background-color: #ffffff;
+  color: #222222;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 19.976px;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  &::placeholder {
+    color: #dbdbdb;
+    font-family: "Lexend Deca", sans-serif;
+  }
+  &:disabled {
+    background: #f2f2f2;
+  }
 `;
-
-export { Logo, Container, Input, Button, Login };
+export { Container, StyledLink, Button, Input };

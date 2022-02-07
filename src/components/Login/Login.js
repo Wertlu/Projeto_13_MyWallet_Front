@@ -1,56 +1,58 @@
-import { useState } from "react";
+import { React, useState, useContext } from "react";
+import { Container, StyledLink, Button, Input } from "./LoginStyle";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { Logo, Container, Input, Button, SignUp } from "./LoginStyle";
+
+import UserContext from "../../context/UserContext";
+import Loading from "../../Loading";
+import { login } from "../../services/mywallet";
 
 export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [Loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { setToken } = useContext(UserContext);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  function handleLogin(e) {
+    setIsLoading(true);
+    e.preventDefault();
+    const promise = login({ email, password });
 
-    function logining(event) {
-        setLoading(true);
+    promise.then((response) => {
+      setToken(response.data.token);
+      navigate("/home");
+    });
 
-        event.preventDefault();
-        const promise = axios.post("http://localhost:5000/users", {
-            email: email,
-            password: password,
-        });
+    promise.catch(() => {
+      alert("Confira seus dados e tente novamente");
+      setIsLoading(false);
+    });
+  }
 
-        promise.then((r) => {
-            navigate("/principal");
-        });
-        promise.catch((e) => {
-            alert("E-mail ou senha não correspondem, tente novamente.");
-            setLoading(false);
-        });
-    }
+  return (
+    <Container>
+      <span>MyWallet</span>
+      <form onSubmit={handleLogin}>
+        <Input
+          disabled={isLoading}
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="E-mail"
+        ></Input>
+        <Input
+          disabled={isLoading}
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          placeholder="Senha"
+        ></Input>
 
-    return (
-        <Container>
-            <Logo>MyWallet</Logo>
-            <form onSubmit={logining}>
-                <Input
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    placeholder=" E-mail"
-                    disabled={Loading}
-                ></Input>
-                <Input
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    placeholder=" Senha"
-                    disabled={Loading}
-                ></Input>
-                <Button type="submit" disabled={Loading}>
-                    Entrar
-                </Button>
-                <SignUp to="/cadastro">Primeira vez? Cadastre-se!</SignUp>
-            </form>
-        </Container>
-    );
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? <Loading /> : "Entrar"}
+        </Button>
+      </form>
+      <StyledLink to="/sign-up">Não possui conta? Cadastre-se</StyledLink>
+    </Container>
+  );
 }

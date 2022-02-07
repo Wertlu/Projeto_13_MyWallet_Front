@@ -1,76 +1,76 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { signUp } from "../../services/mywallet";
+import { Container, StyledLink, Button, Input } from "./SignupStyle";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { Logo, Container, Input, Button, Login } from "./SignupStyle";
+
+import Loading from "../../Loading";
 
 export default function Signup() {
-  const [Loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newPass, setnewPass] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  function Signingup(event) {
-    setLoading(true);
-    event.preventDefault();
-
-    if (password === newPass) {
-      const promise = axios.post("http://localhost:5000/users", {
-        email,
-        password,
-        name,
-      });
-
-      promise.then(() => navigate("/"));
-
-      promise.catch(() => {
-        alert("Algo deu errado, tente novamente");
-        setLoading(false);
-      });
+  function handleSignUp(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    const promise = signUp({ name, email, password });
+    if (password !== confirmPassword) {
+      alert("As senhas não conferem. Tente de novo");
+      setIsLoading(false);
     } else {
-      alert("As senhas não coincidem");
-      setLoading(false);
+      promise.then(() => navigate("/"));
+      setIsLoading(true);
     }
+    promise.catch(() => {
+alert("Confira os dados e tente de novo");
+      setIsLoading(false);
+    });
   }
 
   return (
     <Container>
-      <Logo>MyWallet</Logo>
-      <form onSubmit={Signingup}>
+      <form onSubmit={handleSignUp}>
         <Input
+          disabled={isLoading}
           type="text"
-          onChange={(e) => setName(e.target.value)}
           value={name}
-          placeholder=" Nome"
-          disabled={Loading}
-        ></Input>
+          onChange={(e) => setName(e.target.value)}
+          name="name"
+          placeholder="Nome"
+        />
         <Input
+          disabled={isLoading}
           type="email"
-          onChange={(e) => setEmail(e.target.value)}
           value={email}
-          placeholder=" E-mail"
-          disabled={Loading}
-        ></Input>
+          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          placeholder="E-mail"
+        />
         <Input
+          disabled={isLoading}
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
           value={password}
-          placeholder=" Senha"
-          disabled={Loading}
-        ></Input>
+          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          placeholder="Senha"
+        />
+
         <Input
+          disabled={isLoading}
           type="password"
-          onChange={(e) => setnewPass(e.target.value)}
-          value={newPass}
-          placeholder=" Confirme a senha"
-          disabled={Loading}
-        ></Input>
-        <Button type="submit" disabled={Loading}>
-          Cadastrar
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          name="password"
+          placeholder="Confirme sua senha"
+        />
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? <Loading /> : "Cadastrar"}
         </Button>
-        <Login to="/">Já tem uma conta? Entre agora!</Login>
       </form>
+      <StyledLink to="/">Já tem uma conta? Faça login!</StyledLink>
     </Container>
   );
 }

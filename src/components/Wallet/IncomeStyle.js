@@ -1,37 +1,39 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Container = styled.div`
-  min-height: 100vh;
-  margin-left: 30px;
-  margin-right: 30px;
+const Header = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
-  span{
-    font-family: 'Saira Stencil One', cursive;
-font-style: normal;
-font-weight: normal;
-font-size: 32px;
-line-height: 50px;
-color: #FFFFFF;
+  z-index: 320;
+  .title {
+    min-height: 3vh;
+    margin-left: 30px;
+    margin-top: 30px;
+  }
+  h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 31px;
+    color: #ffffff;
   }
 `;
-
-const StyledLink = styled(Link)`
-  height: 40px;
+const Container = styled.div`
+  min-height: 80vh;
+  min-width: 30vh;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 40px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 18px;
-  color: #ffffff;
-  text-decoration: none;
+  gap: 16px;
+  form {
+    margin-top: 2vh;
+  }
 `;
 
 const Button = styled.button`
@@ -72,4 +74,4 @@ const Input = styled.input`
     background: #f2f2f2;
   }
 `;
-export { Container, StyledLink, Button, Input };
+export { Header, Container, Button, Input };
