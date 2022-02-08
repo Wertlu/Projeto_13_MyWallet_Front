@@ -20,8 +20,8 @@ export default function App() {
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/home" element={<Wallet />} />
-          <Route path="/deposit" element={<Income />} />
-          <Route path="/withdraw" element={<Outcome />} />
+          <Route path="/home/deposit" element={<Income />} />
+          <Route path="/home/withdraw" element={<Outcome />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

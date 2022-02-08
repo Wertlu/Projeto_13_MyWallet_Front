@@ -1,23 +1,35 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
-
 function signUp(formData) {
-  const promise = axios.post(`${BASE_URL}/sign-up`, formData);
+  const promise = axios.post(
+    `${process.env.REACT_APP_API}/auth/sign-up`,
+    formData
+  );
   return promise;
 }
 function login(formData) {
-  const promise = axios.post(`${BASE_URL}/login`, formData);
+  const promise = axios.post(
+    `${process.env.REACT_APP_API}/auth/login`,
+    formData
+  );
   return promise;
 }
 
-function addWithdraw(auth) {
-  const promise = axios.get(`${BASE_URL}/home/withdraw`, auth);
+function addWithdraw(data, token) {
+  const promise = axios.post(
+    `${process.env.REACT_APP_API}/home/withdraw`,
+    data,
+    token
+  );
   return promise;
 }
 
-function addDeposit(data, auth) {
-  const promise = axios.post(`${BASE_URL}/home/deposit`, data, auth);
+function addDeposit(data, token) {
+  const promise = axios.post(
+    `${process.env.REACT_APP_API}/home/deposit`,
+    data,
+    token
+  );
   return promise;
 }
 
